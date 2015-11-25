@@ -1,0 +1,13 @@
+---
+
+- name: install dnsmasq package
+  apt:
+    name: {{ item }}
+    state: latest
+  with_items:
+    - dnsmasq
+
+- name: set consul config
+  template:
+    src: 10-consul.j2
+    dest: /etc/dnsmasq.d/10-consul
