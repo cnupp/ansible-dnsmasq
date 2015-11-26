@@ -2,12 +2,21 @@
 
 - name: install dnsmasq package
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
   with_items:
     - dnsmasq
 
-- name: set consul config
+- name: set dnsmasq config
   template:
-    src: 10-consul.j2
+    src: dnsmasq.d/10-consul.j2
     dest: /etc/dnsmasq.d/10-consul
+  notify:
+    - restart dnsmasq
+
+
+- name: ensure dnsmasq restarted
+  service: name=dnsmasq state=started
+
+- name: set dnsmasq auto start
+  service: name=dnsmasq enabled=yes
