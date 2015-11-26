@@ -7,13 +7,19 @@
   with_items:
     - dnsmasq
 
+- name: copy dnsmasq router conf
+  template:
+    src: dnsmasq.d/1-router.j2
+    dest: /etc/dnsmasq.d/1-router
+  notify:
+    - restart dnsmasq
+
 - name: set dnsmasq config
   template:
     src: dnsmasq.d/10-consul.j2
     dest: /etc/dnsmasq.d/10-consul
   notify:
     - restart dnsmasq
-
 
 - name: ensure dnsmasq restarted
   service: name=dnsmasq state=started
