@@ -7,10 +7,8 @@
   with_items:
     - dnsmasq
 
-- name: copy dnsmasq router conf
-  template:
-    src: dnsmasq.d/1-router.j2
-    dest: /etc/dnsmasq.d/1-router
+- name: remove 1-router
+  file: path=/etc/dnsmasq.d/1-router state=absent
   notify:
     - restart dnsmasq
 
