@@ -14,8 +14,8 @@
 
 - name: set dnsmasq config
   template:
-    src: dnsmasq.d/10-consul.j2
-    dest: /etc/dnsmasq.d/10-consul
+    src: dnsmasq.d/1-consul.j2
+    dest: /etc/dnsmasq.d/1-consul
   notify:
     - restart dnsmasq
 
